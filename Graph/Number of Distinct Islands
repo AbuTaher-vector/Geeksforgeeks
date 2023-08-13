@@ -1,0 +1,32 @@
+class Solution {
+  public:
+    vector<pair<int,int>>v={{1,0},{0,1},{-1,0},{0,-1}};
+    set<vector<pair<int,int>>>s;
+    void dfs(int i,int j,vector<vector<int>>&grid,vector<pair<int,int>>&p,int basei,int basej){
+        p.push_back({i-basei,j-basej});
+        grid[i][j]=0;
+        for(int k=0;k<4;k++){
+            int x = i+v[k].first;
+            int y = j+v[k].second;
+            if(x>=0 && y>=0 && x<grid.size() && y<grid[0].size() && grid[x][y]){
+                dfs(x,y,grid,p,basei,basej);
+            }
+        }
+        
+    }
+    int countDistinctIslands(vector<vector<int>>& grid) {
+       for(int i=0;i<grid.size();i++){
+           for(int j=0;j<grid[0].size();j++){
+               if(grid[i][j]==1){
+                   vector<pair<int,int>>p;
+                   dfs(i,j,grid,p,i,j);
+                   if(p.size()>0) s.insert(p);
+               }
+               
+           }
+       }
+       return s.size();
+    }
+};
+
+Link : https://practice.geeksforgeeks.org/problems/number-of-distinct-islands/1
