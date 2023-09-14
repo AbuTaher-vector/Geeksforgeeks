@@ -1,0 +1,20 @@
+class Solution{
+public:
+    void dfs(int s,int d,int &ans,vector<int>g[]){
+        if(s==d){
+            ans++;
+            return;
+        }
+        for(auto e:g[s]) dfs(e,d,ans,g);
+    }
+	int possible_paths(vector<vector<int>>edges, int n, int s, int d){
+	    vector<int>g[n];
+	    for(int i=0;i<edges.size();i++){
+	        g[edges[i][0]].push_back(edges[i][1]);
+	    }
+	   int ans=0;
+	   dfs(s,d,ans,g);
+	   return ans;
+	}
+};
+//Link : https://practice.geeksforgeeks.org/problems/count-the-paths4332/1?page=1&difficulty[]=0&category[]=Graph&sortBy=submissions
